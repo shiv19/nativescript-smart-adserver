@@ -1,28 +1,46 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import * as app from 'tns-core-modules/application';
-import * as dialogs from 'tns-core-modules/ui/dialogs';
+import {
+    View,
+    Style,
+    Property,
+    CssProperty,
+    isIOS
+} from "tns-core-modules/ui/core/view";
 
-export class Common extends Observable {
-  public message: string;
+export const siteIdProperty = new Property<Common, number>({
+    name: "siteId",
+    defaultValue: 104808,
+    affectsLayout: isIOS
+});
+export const pageIdProperty = new Property<Common, string>({
+    name: "pageId",
+    defaultValue: "663262",
+    affectsLayout: isIOS
+});
+export const formatIdProperty = new Property<Common, number>({
+    name: "formatId",
+    defaultValue: 15140,
+    affectsLayout: isIOS
+});
+export const autoRefreshProperty = new Property<Common, boolean>({
+    name: "autoRefresh",
+    defaultValue: true,
+    affectsLayout: isIOS
+});
+export const targetProperty = new Property<Common, string>({
+    name: "target",
+    defaultValue: "",
+    affectsLayout: isIOS
+});
 
-  constructor() {
-    super();
-    this.message = Utils.SUCCESS_MSG();
-  }
-
-  public greet() {
-    return "Hello, NS";
-  }
+export class Common extends View {
+    constructor() {
+        super();
+        console.log("in plugin");
+    }
 }
 
-export class Utils {
-  public static SUCCESS_MSG(): string {
-    let msg = `Your plugin is working on ${app.android ? 'Android' : 'iOS'}.`;
-
-    setTimeout(() => {
-      dialogs.alert(`${msg} For real. It's really working :)`).then(() => console.log(`Dialog closed.`));
-    }, 2000);
-
-    return msg;
-  }
-}
+siteIdProperty.register(Common);
+pageIdProperty.register(Common);
+formatIdProperty.register(Common);
+autoRefreshProperty.register(Common);
+targetProperty.register(Common);
