@@ -1,14 +1,9 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import { SmartAdserver } from 'nativescript-smart-adserver';
+import { Observable } from "tns-core-modules/data/observable";
 
 export class HelloWorldModel extends Observable {
-  public message: string;
-  private smartAdserver: SmartAdserver;
+    public message: string;
 
-  constructor() {
-    super();
-
-    this.smartAdserver = new SmartAdserver();
-    this.message = this.smartAdserver.message;
-  }
+    constructor() {
+        super();
+    }
 }

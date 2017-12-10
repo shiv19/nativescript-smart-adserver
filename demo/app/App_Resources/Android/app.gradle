@@ -1,15 +1,21 @@
 // Add your native dependencies here:
 
 // Uncomment to add recyclerview-v7 dependency
-//dependencies {
-//	compile 'com.android.support:recyclerview-v7:+'
-//}
+dependencies {
+	compile 'com.android.support:appcompat-v7:25.2.0'
+  compile 'com.android.support:design:25.3.1'
+  compile 'com.google.android.gms:play-services-ads:11.0.4'
+}
+project.ext {
+    googlePlayServicesVersion = "+"
+}
 
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "org.nativescript.demo"  
-  }  
+    applicationId = "org.nativescript.demo"
+    multiDexEnabled true
+  }
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
   }  
