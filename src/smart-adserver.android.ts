@@ -4,7 +4,8 @@ import {
     pageIdProperty,
     formatIdProperty,
     autoRefreshProperty,
-    targetProperty
+    targetProperty,
+    baseUrlProperty
 } from "./smart-adserver.common";
 import * as app from "tns-core-modules/application";
 
@@ -16,6 +17,7 @@ export class SmartAdserver extends Common {
     formatId: string;
     autoRefresh: string;
     target: string;
+    baseUrl: string;
 
     public createNativeView(): Object {
         console.log("createNativeView");
@@ -60,5 +62,8 @@ export class SmartAdserver extends Common {
     }
     [targetProperty.setNative](value: string) {
         this.target = value;
+    }
+    [baseUrlProperty.setNative](value: string) {
+        this.baseUrl = value;
     }
 }

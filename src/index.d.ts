@@ -8,12 +8,10 @@ export declare const autoRefreshProperty: Property<Common, boolean>;
 export declare const targetProperty: Property<Common, string>;
 export declare class SmartAdserver extends Common {
     nativeView: com.smartadserver.android.library.SASBannerView;
-    siteId: number;
+    siteId: string;
     pageId: string;
-    formatId: number;
-    autoRefresh: boolean;
+    formatId: string;
+    autoRefresh: string;
     target: string;
-    createNativeView(): Object;
-    initNativeView(): void;
-    disposeNativeView(): void;
+    baseUrl: string;
 }

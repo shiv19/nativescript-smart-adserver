@@ -4,7 +4,8 @@ import {
     formatIdProperty,
     pageIdProperty,
     siteIdProperty,
-    targetProperty
+    targetProperty,
+    baseUrlProperty
 } from "./smart-adserver.common";
 import { layout } from "tns-core-modules/utils/utils";
 
@@ -14,6 +15,7 @@ export class SmartAdserver extends Common {
     pageId: string;
     formatId: string;
     autoRefresh: string;
+    baseUrl: string;
     constructor() {
         super();
         this.nativeView = SASBannerView.new();
@@ -38,23 +40,27 @@ export class SmartAdserver extends Common {
     }
 
     [siteIdProperty.setNative](value: string) {
-        return value;
+        this.siteId = value;
     }
 
     [pageIdProperty.setNative](value: string) {
-        return value;
+        this.pageId = value;
     }
 
     [formatIdProperty.setNative](value: string) {
-        return value;
+        this.formatId = value;
     }
 
     [autoRefreshProperty.setNative](value: string) {
-        return value;
+        this.autoRefresh = value;
     }
 
     [targetProperty.setNative](value: string) {
-        return value;
+        this.target = value;
+    }
+
+    [baseUrlProperty.setNative](value: string) {
+        this.baseUrl = value;
     }
 }
 

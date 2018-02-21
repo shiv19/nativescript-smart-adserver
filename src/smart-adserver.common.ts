@@ -25,6 +25,11 @@ export const targetProperty = new Property<Common, string>({
     defaultValue: "",
     affectsLayout: isIOS
 });
+export const baseUrlProperty = new Property<Common, string>({
+    name: "target",
+    defaultValue: "http://www.test.com",
+    affectsLayout: isIOS
+});
 
 export class Common extends View {
     siteId: string;
@@ -44,3 +49,4 @@ pageIdProperty.register(Common);
 formatIdProperty.register(Common);
 autoRefreshProperty.register(Common);
 targetProperty.register(Common);
+baseUrlProperty.register(Common);
