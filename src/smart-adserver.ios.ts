@@ -1,3 +1,4 @@
+import { topmost } from "tns-core-modules/ui/frame";
 import {
     autoRefreshProperty,
     Common,
@@ -8,8 +9,9 @@ import {
 import { layout } from "tns-core-modules/utils/utils";
 import * as app from "tns-core-modules/application";
 
-export class SmartAdserverBase extends Common {
-    nativeView: SASBannerView;
+export class SmartAdserver extends Common {
+    nativeView: UIView;
+    _view: SASBannerView;
 
     static SITE_ID: number;
     static BASE_URL: string;
@@ -20,7 +22,11 @@ export class SmartAdserverBase extends Common {
 
     constructor() {
         super();
-        this.nativeView = SASBannerView.new();
+        this.nativeView = UIView.new();
+        this._view = SASBannerView.new();
+        this._view.delegate = SASAdViewDelegateImpl.initWithOwner(
+            new WeakRef<SmartAdserver>(this)
+        );
     }
 
     public static init(siteId: number, baseUrl: string) {
@@ -31,15 +37,25 @@ export class SmartAdserverBase extends Common {
         });
     }
 
+    public initNativeView() {
+        this._view.loadFormatIdPageIdMasterTarget(
+            parseInt(this.formatId, 10),
+            this.pageId,
+            true,
+            ""
+        );
+        this._view.autoresizingMask =
+            UIViewAutoresizing.FlexibleWidth |
+            UIViewAutoresizing.FlexibleHeight;
+        this._view.frame = this.nativeView.bounds;
+        this.nativeView.addSubview(this._view);
+    }
+
     public onLoaded() {
         super.onLoaded();
-        this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(
-            new WeakRef<SmartAdserverBase>(this)
-        );
     }
 
     public onUnloaded() {
-        this.nativeView.delegate = null;
         super.onUnloaded();
     }
 
@@ -68,10 +84,10 @@ export class SmartAdserverBase extends Common {
 
 class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
     public static ObjCProtocols = [SASAdViewDelegate];
-    private _owner: WeakRef<SmartAdserverBase>;
+    private _owner: WeakRef<SmartAdserver>;
 
     public static initWithOwner(
-        owner: WeakRef<SmartAdserverBase>
+        owner: WeakRef<SmartAdserver>
     ): SASAdViewDelegateImpl {
         const delegate = new SASAdViewDelegateImpl();
         delegate._owner = owner;
@@ -84,24 +100,5 @@ class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
 
     adViewDidLoad(adView: SASAdView) {
         console.log("ad view loaded");
-    }
-}
-
-export class SmartAdserver extends SmartAdserverBase {
-    controller: any;
-
-    constructor() {
-        super();
-        this.controller = SASBannerView.new();
-    }
-
-    public initNativeView() {
-        this.controller.loadFormatIdPageIdMasterTarget(
-            this.formatId,
-            this.pageId,
-            true,
-            ""
-        );
-        this.nativeView.addSubview(this.controller.view);
     }
 }
