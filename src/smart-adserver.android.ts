@@ -11,19 +11,25 @@ import * as app from "tns-core-modules/application";
 declare var com: any;
 export class SmartAdserver extends Common {
     nativeView: com.smartadserver.android.library.SASBannerView;
-    siteId: number;
+    siteId: string;
     pageId: string;
-    formatId: number;
-    autoRefresh: boolean;
+    formatId: string;
+    autoRefresh: string;
     target: string;
 
     public createNativeView(): Object {
         console.log("createNativeView");
         const SASBannerView = new com.smartadserver.android.library.SASBannerView(
-            app.android.foregroundActivity
+            app.android.context
         );
         SASBannerView.setRefreshInterval(30);
-        SASBannerView.loadAd(104808, "663262", 15140, true, "");
+        SASBannerView.loadAd(
+            parseInt(this.siteId, 10),
+            this.pageId,
+            parseInt(this.formatId, 10),
+            this.autoRefresh === "true" ? true : false,
+            ""
+        );
         return SASBannerView;
     }
 
@@ -40,16 +46,16 @@ export class SmartAdserver extends Common {
         this.nativeView.onDestroy();
     }
 
-    [siteIdProperty.setNative](value: number) {
+    [siteIdProperty.setNative](value: string) {
         this.siteId = value;
     }
     [pageIdProperty.setNative](value: string) {
         this.pageId = value;
     }
-    [formatIdProperty.setNative](value: number) {
+    [formatIdProperty.setNative](value: string) {
         this.formatId = value;
     }
-    [autoRefreshProperty.setNative](value: boolean) {
+    [autoRefreshProperty.setNative](value: string) {
         this.autoRefresh = value;
     }
     [targetProperty.setNative](value: string) {

@@ -1,11 +1,11 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
   xmlns:ui="nativescript-smart-adserver">
   <StackLayout class="p-20">
-    <ui:SmartAdserver 
-    siteId="104808"
-    pageId="663262"
-    formatId="15140"
-    autoRefresh="true" />
+    <ui:SmartAdserver height="150"
+      siteId="104808"
+      pageId="663262"
+      formatId="15140"
+      autoRefresh="true" />
     <Label text="Smart Ad Server" class="text-center"/>
   </StackLayout>
 </Page>
