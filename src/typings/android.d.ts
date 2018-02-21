@@ -1,4 +1,3 @@
-/// <reference path="./_helpers.d.ts" />
 declare module com {
 	export module smartadserver {
 		export module android {

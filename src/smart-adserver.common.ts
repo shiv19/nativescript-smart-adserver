@@ -1,10 +1,4 @@
-import {
-    View,
-    Style,
-    Property,
-    CssProperty,
-    isIOS
-} from "tns-core-modules/ui/core/view";
+import {isIOS, Property, View} from "tns-core-modules/ui/core/view";
 
 export const siteIdProperty = new Property<Common, number>({
     name: "siteId",
@@ -33,6 +27,12 @@ export const targetProperty = new Property<Common, string>({
 });
 
 export class Common extends View {
+    siteId: number;
+    pageId: string;
+    formatId: number;
+    autoRefresh: boolean;
+    target: string;
+
     constructor() {
         super();
         console.log("in plugin");

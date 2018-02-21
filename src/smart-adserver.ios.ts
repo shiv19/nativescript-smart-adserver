@@ -1,46 +1,68 @@
 import {
-    Common,
-    siteIdProperty,
-    pageIdProperty,
-    formatIdProperty,
     autoRefreshProperty,
+    Common,
+    formatIdProperty,
+    pageIdProperty,
+    siteIdProperty,
     targetProperty
 } from "./smart-adserver.common";
-
-export declare class SASBannerView {
-    loadAd(
-        param0: number,
-        param1: string,
-        param2: number,
-        param3: boolean,
-        param4: string
-    );
-}
+import {layout} from "tns-core-modules/utils/utils";
 
 export class SmartAdserver extends Common {
-    siteId: string;
-    pageId: string;
-    formatId: string;
-    autoRefresh: string;
-    target: string;
-
+    nativeView: SASBannerView;
     constructor() {
         super();
+        this.nativeView = SASBannerView.new();
     }
 
-    [siteIdProperty.setNative](value: string) {
-        this.siteId = value;
+    public onLoaded() {
+        super.onLoaded();
+        this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(new WeakRef<SmartAdserver>(this));
     }
+
+    public onUnloaded() {
+        this.nativeView.delegate = null;
+        super.onUnloaded();
+    }
+
+    public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number) {
+        const width = layout.getMeasureSpecSize(widthMeasureSpec);
+        const height = layout.getMeasureSpecSize(heightMeasureSpec);
+        this.setMeasuredDimension(width, height);
+    }
+
+    [siteIdProperty.setNative](value: number) {
+        return value;
+    }
+
     [pageIdProperty.setNative](value: string) {
-        this.pageId = value;
+        return value;
     }
+
     [formatIdProperty.setNative](value: string) {
-        this.formatId = value;
+        return value;
     }
-    [autoRefreshProperty.setNative](value: string) {
-        this.autoRefresh = value;
+
+    [autoRefreshProperty.setNative](value: boolean) {
+        return value;
     }
+
     [targetProperty.setNative](value: string) {
-        this.target = value;
+        return value;
+    }
+}
+
+class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
+    public static ObjCProtocols = [SASAdViewDelegate];
+    private _owner: WeakRef<SmartAdserver>;
+
+    public static initWithOwner(owner: WeakRef<SmartAdserver>): SASAdViewDelegateImpl {
+        const delegate = new SASAdViewDelegateImpl();
+        delegate._owner = owner;
+        return delegate;
+    }
+
+    adViewDidFailToLoadWithError(adView: SASAdView, error: NSError) {
+        adView.removeFromSuperview();
     }
 }
