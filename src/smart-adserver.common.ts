@@ -1,4 +1,4 @@
-import {isIOS, Property, View} from "tns-core-modules/ui/core/view";
+import { isIOS, Property, View } from "tns-core-modules/ui/core/view";
 
 export const siteIdProperty = new Property<Common, number>({
     name: "siteId",
@@ -27,10 +27,10 @@ export const targetProperty = new Property<Common, string>({
 });
 
 export class Common extends View {
-    siteId: number;
+    siteId: string;
     pageId: string;
-    formatId: number;
-    autoRefresh: boolean;
+    formatId: string;
+    autoRefresh: string;
     target: string;
 
     constructor() {

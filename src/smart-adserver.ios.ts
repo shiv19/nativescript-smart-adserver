@@ -6,10 +6,14 @@ import {
     siteIdProperty,
     targetProperty
 } from "./smart-adserver.common";
-import {layout} from "tns-core-modules/utils/utils";
+import { layout } from "tns-core-modules/utils/utils";
 
 export class SmartAdserver extends Common {
     nativeView: SASBannerView;
+    siteId: string;
+    pageId: string;
+    formatId: string;
+    autoRefresh: string;
     constructor() {
         super();
         this.nativeView = SASBannerView.new();
@@ -17,7 +21,9 @@ export class SmartAdserver extends Common {
 
     public onLoaded() {
         super.onLoaded();
-        this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(new WeakRef<SmartAdserver>(this));
+        this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(
+            new WeakRef<SmartAdserver>(this)
+        );
     }
 
     public onUnloaded() {
@@ -31,7 +37,7 @@ export class SmartAdserver extends Common {
         this.setMeasuredDimension(width, height);
     }
 
-    [siteIdProperty.setNative](value: number) {
+    [siteIdProperty.setNative](value: string) {
         return value;
     }
 
@@ -43,7 +49,7 @@ export class SmartAdserver extends Common {
         return value;
     }
 
-    [autoRefreshProperty.setNative](value: boolean) {
+    [autoRefreshProperty.setNative](value: string) {
         return value;
     }
 
@@ -56,7 +62,9 @@ class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
     public static ObjCProtocols = [SASAdViewDelegate];
     private _owner: WeakRef<SmartAdserver>;
 
-    public static initWithOwner(owner: WeakRef<SmartAdserver>): SASAdViewDelegateImpl {
+    public static initWithOwner(
+        owner: WeakRef<SmartAdserver>
+    ): SASAdViewDelegateImpl {
         const delegate = new SASAdViewDelegateImpl();
         delegate._owner = owner;
         return delegate;
