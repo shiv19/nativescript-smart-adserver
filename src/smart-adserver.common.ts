@@ -22,7 +22,6 @@ export const targetProperty = new Property<Common, string>({
 });
 
 export class Common extends View {
-    siteId: string;
     pageId: string;
     formatId: string;
     autoRefresh: string;

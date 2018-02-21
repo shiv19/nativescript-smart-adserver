@@ -33,26 +33,29 @@ export class SmartAdserver extends Common {
         SmartAdserver.SITE_ID = siteId;
         SmartAdserver.BASE_URL = baseUrl;
         app.on("launch", () => {
+            console.log("plugin initialized");
             SASAdView.setSiteIDBaseURL(siteId, baseUrl);
         });
     }
 
     public initNativeView() {
+        super.initNativeView();
+    }
+
+    public onLoaded() {
+        super.onLoaded();
+        console.log("on loaded called");
+        this._view.modalParentViewController = topmost().ios.controller.visibleViewController;
+        this._view.autoresizingMask = UIViewAutoresizing.FlexibleWidth;
         this._view.loadFormatIdPageIdMasterTarget(
             parseInt(this.formatId, 10),
             this.pageId,
             true,
             ""
         );
-        this._view.autoresizingMask =
-            UIViewAutoresizing.FlexibleWidth |
-            UIViewAutoresizing.FlexibleHeight;
         this._view.frame = this.nativeView.bounds;
         this.nativeView.addSubview(this._view);
-    }
-
-    public onLoaded() {
-        super.onLoaded();
+        console.log("end of on loaded");
     }
 
     public onUnloaded() {
