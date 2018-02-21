@@ -8,7 +8,7 @@ import {
 import { layout } from "tns-core-modules/utils/utils";
 import * as app from "tns-core-modules/application";
 
-export class SmartAdserver extends Common {
+export class SmartAdserverBase extends Common {
     nativeView: SASBannerView;
 
     static SITE_ID: number;
@@ -34,7 +34,7 @@ export class SmartAdserver extends Common {
     public onLoaded() {
         super.onLoaded();
         this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(
-            new WeakRef<SmartAdserver>(this)
+            new WeakRef<SmartAdserverBase>(this)
         );
     }
 
@@ -68,10 +68,10 @@ export class SmartAdserver extends Common {
 
 class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
     public static ObjCProtocols = [SASAdViewDelegate];
-    private _owner: WeakRef<SmartAdserver>;
+    private _owner: WeakRef<SmartAdserverBase>;
 
     public static initWithOwner(
-        owner: WeakRef<SmartAdserver>
+        owner: WeakRef<SmartAdserverBase>
     ): SASAdViewDelegateImpl {
         const delegate = new SASAdViewDelegateImpl();
         delegate._owner = owner;
@@ -84,5 +84,24 @@ class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
 
     adViewDidLoad(adView: SASAdView) {
         console.log("ad view loaded");
+    }
+}
+
+export class SmartAdserver extends SmartAdserverBase {
+    controller: any;
+
+    constructor() {
+        super();
+        this.controller = SASBannerView.new();
+    }
+
+    public initNativeView() {
+        this.controller.loadFormatIdPageIdMasterTarget(
+            this.formatId,
+            this.pageId,
+            true,
+            ""
+        );
+        this.nativeView.addSubview(this.controller.view);
     }
 }
