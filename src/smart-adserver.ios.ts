@@ -3,22 +3,32 @@ import {
     Common,
     formatIdProperty,
     pageIdProperty,
-    siteIdProperty,
-    targetProperty,
-    baseUrlProperty
+    targetProperty
 } from "./smart-adserver.common";
 import { layout } from "tns-core-modules/utils/utils";
+import * as app from "tns-core-modules/application";
 
 export class SmartAdserver extends Common {
     nativeView: SASBannerView;
-    siteId: string;
+
+    static SITE_ID: number;
+    static BASE_URL: string;
+
     pageId: string;
     formatId: string;
     autoRefresh: string;
-    baseUrl: string;
+
     constructor() {
         super();
         this.nativeView = SASBannerView.new();
+    }
+
+    public static init(siteId: number, baseUrl: string) {
+        SmartAdserver.SITE_ID = siteId;
+        SmartAdserver.BASE_URL = baseUrl;
+        app.on("launch", () => {
+            SASAdView.setSiteIDBaseURL(siteId, baseUrl);
+        });
     }
 
     public onLoaded() {
@@ -39,10 +49,6 @@ export class SmartAdserver extends Common {
         this.setMeasuredDimension(width, height);
     }
 
-    [siteIdProperty.setNative](value: string) {
-        this.siteId = value;
-    }
-
     [pageIdProperty.setNative](value: string) {
         this.pageId = value;
     }
@@ -57,10 +63,6 @@ export class SmartAdserver extends Common {
 
     [targetProperty.setNative](value: string) {
         this.target = value;
-    }
-
-    [baseUrlProperty.setNative](value: string) {
-        this.baseUrl = value;
     }
 }
 
@@ -78,5 +80,9 @@ class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
 
     adViewDidFailToLoadWithError(adView: SASAdView, error: NSError) {
         adView.removeFromSuperview();
+    }
+
+    adViewDidLoad(adView: SASAdView) {
+        console.log("ad view loaded");
     }
 }

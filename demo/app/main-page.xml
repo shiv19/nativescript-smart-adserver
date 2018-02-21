@@ -2,7 +2,6 @@
   xmlns:ui="nativescript-smart-adserver">
   <StackLayout class="p-20">
     <ui:SmartAdserver height="150"
-      siteId="104808"
       pageId="663262"
       formatId="15140"
       autoRefresh="true" />

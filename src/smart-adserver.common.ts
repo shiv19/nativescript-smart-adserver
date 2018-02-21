@@ -1,10 +1,5 @@
 import { isIOS, Property, View } from "tns-core-modules/ui/core/view";
 
-export const siteIdProperty = new Property<Common, number>({
-    name: "siteId",
-    defaultValue: 104808,
-    affectsLayout: isIOS
-});
 export const pageIdProperty = new Property<Common, string>({
     name: "pageId",
     defaultValue: "663262",
@@ -25,11 +20,6 @@ export const targetProperty = new Property<Common, string>({
     defaultValue: "",
     affectsLayout: isIOS
 });
-export const baseUrlProperty = new Property<Common, string>({
-    name: "target",
-    defaultValue: "http://www.test.com",
-    affectsLayout: isIOS
-});
 
 export class Common extends View {
     siteId: string;
@@ -44,9 +34,7 @@ export class Common extends View {
     }
 }
 
-siteIdProperty.register(Common);
 pageIdProperty.register(Common);
 formatIdProperty.register(Common);
 autoRefreshProperty.register(Common);
 targetProperty.register(Common);
-baseUrlProperty.register(Common);
