@@ -10,7 +10,7 @@ import { layout } from "tns-core-modules/utils/utils";
 import * as app from "tns-core-modules/application";
 
 export class SmartAdserver extends Common {
-    nativeView: UIView;
+    nativeView: SASAdView;
     _view: SASBannerView;
 
     static SITE_ID: number;
@@ -22,40 +22,47 @@ export class SmartAdserver extends Common {
 
     constructor() {
         super();
-        this.nativeView = UIView.new();
-        this._view = SASBannerView.new();
-        this._view.delegate = SASAdViewDelegateImpl.initWithOwner(
-            new WeakRef<SmartAdserver>(this)
-        );
     }
 
     public static init(siteId: number, baseUrl: string) {
         SmartAdserver.SITE_ID = siteId;
         SmartAdserver.BASE_URL = baseUrl;
         app.on("launch", () => {
-            console.log("plugin initialized");
             SASAdView.setSiteIDBaseURL(siteId, baseUrl);
         });
     }
 
-    public initNativeView() {
-        super.initNativeView();
+    public createNativeView() {
+        this._view = SASBannerView.new();
+        this._view.delegate = SASAdViewDelegateImpl.initWithOwner(
+            new WeakRef<SmartAdserver>(this)
+        );
+        return SASAdView.new();
     }
 
-    public onLoaded() {
-        super.onLoaded();
-        console.log("on loaded called");
+    public initNativeView() {
+        super.initNativeView();
         this._view.modalParentViewController = topmost().ios.controller.visibleViewController;
         this._view.autoresizingMask = UIViewAutoresizing.FlexibleWidth;
         this._view.loadFormatIdPageIdMasterTarget(
             parseInt(this.formatId, 10),
             this.pageId,
             true,
-            ""
+            null
         );
         this._view.frame = this.nativeView.bounds;
         this.nativeView.addSubview(this._view);
-        console.log("end of on loaded");
+    }
+
+    public disposeNativeView() {
+        this._view.delegate = null;
+        this._view.removeFromSuperview();
+        this._view = null;
+        super.disposeNativeView();
+    }
+
+    public onLoaded() {
+        super.onLoaded();
     }
 
     public onUnloaded() {
