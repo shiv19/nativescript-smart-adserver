@@ -29,7 +29,6 @@ export class Common extends View {
 
     constructor() {
         super();
-        console.log("in plugin");
     }
 }
 

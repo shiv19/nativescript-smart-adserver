@@ -10,8 +10,7 @@ import { layout } from "tns-core-modules/utils/utils";
 import * as app from "tns-core-modules/application";
 
 export class SmartAdserver extends Common {
-    nativeView: SASAdView;
-    _view: SASBannerView;
+    nativeView: SASBannerView;
 
     static SITE_ID: number;
     static BASE_URL: string;
@@ -22,6 +21,7 @@ export class SmartAdserver extends Common {
 
     constructor() {
         super();
+        this.nativeView = SASBannerView.new();
     }
 
     public static init(siteId: number, baseUrl: string) {
@@ -32,49 +32,37 @@ export class SmartAdserver extends Common {
         });
     }
 
-    public createNativeView() {
-        this._view = SASBannerView.alloc().initWithFrameLoader(
-            CGRectMake(0, 0, 200, 150),
-            SASLoader.ActivityIndicatorStyleWhite
-        );
-
-        this._view.delegate = SASAdViewDelegateImpl.initWithOwner(
-            new WeakRef<SmartAdserver>(this)
-        );
-        return SASAdView.alloc().initWithFrameLoader(
-            CGRectMake(0, 0, 200, 150),
-            SASLoader.ActivityIndicatorStyleWhite
-        );
-    }
-
     public initNativeView() {
         super.initNativeView();
-        this._view.modalParentViewController = topmost().ios.controller.visibleViewController;
-        this._view.autoresizingMask = UIViewAutoresizing.FlexibleWidth;
-        this._view.loadFormatIdPageIdMasterTarget(
-            parseInt(this.formatId, 10),
-            this.pageId,
-            true,
-            null
-        );
-        this._view.frame = this.nativeView.bounds;
-        this.nativeView.addSubview(this._view);
     }
 
     public disposeNativeView() {
-        this._view.delegate = null;
-        this._view.removeFromSuperview();
-        this._view = null;
         super.disposeNativeView();
     }
 
     public onLoaded() {
         super.onLoaded();
-        console.log(this.nativeView);
+
+        this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(
+            new WeakRef<SmartAdserver>(this)
+        );
+        this.nativeView.modalParentViewController = topmost().ios.controller.visibleViewController;
+        this.nativeView.autoresizingMask = UIViewAutoresizing.FlexibleWidth;
+        this.nativeView.loadFormatIdPageIdMasterTarget(
+            parseInt(this.formatId, 10),
+            this.pageId,
+            true,
+            null
+        );
+
+        this.nativeView.frame = this.nativeView.bounds;
     }
 
     public onUnloaded() {
         super.onUnloaded();
+        this.nativeView.delegate = null;
+        this.nativeView.removeFromSuperview();
+        this.nativeView = null;
     }
 
     public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number) {

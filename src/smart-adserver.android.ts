@@ -10,7 +10,7 @@ import * as app from "tns-core-modules/application";
 declare var com: any;
 export class SmartAdserver extends Common {
     nativeView: com.smartadserver.android.library.SASBannerView;
-    
+
     static SITE_ID: number;
     static BASE_URL: string;
 
@@ -19,16 +19,15 @@ export class SmartAdserver extends Common {
     autoRefresh: string;
     target: string;
 
-    public static init(siteId:number, baseUrl:string){
+    public static init(siteId: number, baseUrl: string) {
         SmartAdserver.SITE_ID = siteId;
         SmartAdserver.BASE_URL = baseUrl;
-        app.on('launch',()=>{
-            SASAdView.setSiteIDBaseURL(siteId, baseUrl)
-        })
+        app.on("launch", () => {
+            SASAdView.setSiteIDBaseURL(siteId, baseUrl);
+        });
     }
 
     public createNativeView(): Object {
-        console.log("createNativeView");
         const SASBannerView = new com.smartadserver.android.library.SASBannerView(
             app.android.context
         );
@@ -44,10 +43,8 @@ export class SmartAdserver extends Common {
     }
 
     initNativeView(): void {
-        console.log("Start of initNativeView");
         (<any>this.nativeView).owner = this;
         super.initNativeView();
-        console.log("End of initNativeView");
     }
 
     disposeNativeView(): void {
