@@ -41,7 +41,10 @@ export class SmartAdserver extends Common {
         this._view.delegate = SASAdViewDelegateImpl.initWithOwner(
             new WeakRef<SmartAdserver>(this)
         );
-        return SASAdView.new();
+        return SASAdView.alloc().initWithFrameLoader(
+            CGRectMake(0, 0, 200, 150),
+            SASLoader.ActivityIndicatorStyleWhite
+        );
     }
 
     public initNativeView() {
