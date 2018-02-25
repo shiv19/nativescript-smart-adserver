@@ -2,9 +2,9 @@
 import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 
 import { AppModule } from "./app.module";
-import { SmartAdserver } from "nativescript-smart-adserver";
+import { SmartAdBanner } from "nativescript-smart-adserver";
 
-SmartAdserver.init(104808, "https://mobile.smartadserver.com");
+SmartAdBanner.init(104808, "https://mobile.smartadserver.com");
 
 // A traditional NativeScript application starts by initializing global objects, setting up global CSS rules, creating, and navigating to the main page.
 // Angular applications need to take care of their own initialization: modules, components, directives, routes, DI providers.

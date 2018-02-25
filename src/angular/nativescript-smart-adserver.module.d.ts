@@ -1,2 +1,1 @@
-export declare class NativescriptSmartAdserverModule {
-}
+export declare class NativescriptSmartAdBannerModule {}

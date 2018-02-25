@@ -1,6 +1,6 @@
 ﻿import "./bundle-config";
 import * as application from "tns-core-modules/application";
-import { SmartAdserver } from "nativescript-smart-adserver";
+import { SmartAdBanner } from "nativescript-smart-adserver";
 
-SmartAdserver.init(104808, "https://mobile.smartadserver.com");
+SmartAdBanner.init(104808, "https://mobile.smartadserver.com");
 application.start({ moduleName: "main-page" });

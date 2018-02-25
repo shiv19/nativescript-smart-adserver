@@ -8,7 +8,7 @@ import {
 import * as app from "tns-core-modules/application";
 
 declare var com: any;
-export class SmartAdserver extends Common {
+export class SmartAdBanner extends Common {
     nativeView: com.smartadserver.android.library.SASBannerView;
 
     static SITE_ID: number;
@@ -20,8 +20,8 @@ export class SmartAdserver extends Common {
     target: string;
 
     public static init(siteId: number, baseUrl: string) {
-        SmartAdserver.SITE_ID = siteId;
-        SmartAdserver.BASE_URL = baseUrl;
+        SmartAdBanner.SITE_ID = siteId;
+        SmartAdBanner.BASE_URL = baseUrl;
         app.on("launch", () => {
             SASAdView.setSiteIDBaseURL(siteId, baseUrl);
         });
@@ -33,7 +33,7 @@ export class SmartAdserver extends Common {
         );
         SASBannerView.setRefreshInterval(30);
         SASBannerView.loadAd(
-            SmartAdserver.SITE_ID,
+            SmartAdBanner.SITE_ID,
             this.pageId,
             parseInt(this.formatId, 10),
             this.autoRefresh === "true" ? true : false,

@@ -1,8 +1,8 @@
 import { Directive } from "@angular/core";
 
 @Directive({
-    selector: "<YourPluginAngularSelector>"
+    selector: "<smart-ad-banner></smart-ad-banner>"
 })
-export class SmartAdserverDirective {}
+export class SmartAdBannerDirective {}
 
-export const DIRECTIVES = SmartAdserverDirective;
+export const DIRECTIVES = SmartAdBannerDirective;

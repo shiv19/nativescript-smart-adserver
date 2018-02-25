@@ -1,7 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-  xmlns:ui="nativescript-smart-adserver">
+  xmlns:sas="nativescript-smart-adserver">
   <StackLayout class="p-20">
-    <ui:SmartAdserver height="150"
+    <sas:SmartAdBanner height="150"
         pageId="663262"
         formatId="15140"
         autoRefresh="true" />

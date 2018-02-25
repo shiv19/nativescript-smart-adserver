@@ -7,6 +7,6 @@ import { DIRECTIVES } from "./nativescript-smart-adserver.directive";
     declarations: [DIRECTIVES],
     exports: [DIRECTIVES]
 })
-export class NativescriptSmartAdserverModule {}
+export class NativescriptSmartAdBannerModule {}
 
-registerElement("SmartAdserver", () => require("../").SmartAdserver);
+registerElement("SmartAdBanner", () => require("../").SmartAdBanner);

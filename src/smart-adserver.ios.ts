@@ -9,7 +9,7 @@ import {
 import { layout } from "tns-core-modules/utils/utils";
 import * as app from "tns-core-modules/application";
 
-export class SmartAdserver extends Common {
+export class SmartAdBanner extends Common {
     nativeView: SASBannerView;
 
     static SITE_ID: number;

@@ -7,7 +7,7 @@ import { ItemService } from "./item/item.service";
 import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
 
-import { NativescriptSmartAdserverModule } from "nativescript-smart-adserver/angular";
+import { NativescriptSmartAdBannerModule } from "nativescript-smart-adserver/angular";
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -20,7 +20,7 @@ import { NativescriptSmartAdserverModule } from "nativescript-smart-adserver/ang
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativescriptSmartAdserverModule
+        NativescriptSmartAdBannerModule
     ],
     declarations: [AppComponent, ItemsComponent, ItemDetailComponent],
     providers: [ItemService],
