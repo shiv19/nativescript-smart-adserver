@@ -17,7 +17,7 @@ Works on Android and iOS
 ## Installation
 
 ```javascript
-tns plugin add nativescript-smart-adserver
+tns plugin add @nstudio/nativescript-smart-adserver
 ```
 
 ## Usage
