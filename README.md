@@ -4,6 +4,16 @@ Note: Only the Banner module is currently available in this plugin.
 
 Works on Android and iOS
 
+## Screenshots
+
+### Android
+
+<img src="https://github.com/nstudio/nativescript-smart-adserver/blob/master/assets/android-ss.jpeg?raw=true" height="640" >
+
+### iOS
+
+<img src="https://github.com/nstudio/nativescript-smart-adserver/blob/master/assets/ios-ss.png?raw=true" height="640" >
+
 ## Installation
 
 ```javascript
