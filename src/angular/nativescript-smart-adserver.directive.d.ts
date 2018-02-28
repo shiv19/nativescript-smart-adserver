@@ -1,3 +1,3 @@
-export declare class SmartAdserverDirective {
+export declare class SmartAdBannerDirective {
 }
-export declare const DIRECTIVES: typeof SmartAdserverDirective;
+export declare const DIRECTIVES: typeof SmartAdBannerDirective;

@@ -1,5 +1,9 @@
 # nativescript-smart-adserver
 
+Note: Only the Banner module is currently available in this plugin.
+
+Works on Android and iOS
+
 ## Installation
 
 ```javascript
@@ -72,8 +76,6 @@ You can now use the banner using this markup
 ```
 
 ## API
-
-Only the Banner module is currently available in this plugin.
 
 Banner Module API (XML/HTML element Properties)
 

@@ -2,7 +2,7 @@
 import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 
 import { AppModule } from "./app.module";
-import { SmartAdBanner } from "nativescript-smart-adserver";
+import { SmartAdBanner } from "@nstudio/nativescript-smart-adserver";
 
 SmartAdBanner.init(104808, "https://mobile.smartadserver.com");
 

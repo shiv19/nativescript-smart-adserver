@@ -1,4 +1,4 @@
-var SmartAdserver = require("nativescript-smart-adserver").SmartAdserver;
+var SmartAdserver = require("@nstudio/nativescript-smart-adserver").SmartAdserver;
 var smartAdserver = new SmartAdserver();
 
 describe("greet function", function() {

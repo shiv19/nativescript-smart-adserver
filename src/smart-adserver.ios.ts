@@ -25,8 +25,8 @@ export class SmartAdBanner extends Common {
     }
 
     public static init(siteId: number, baseUrl: string) {
-        SmartAdserver.SITE_ID = siteId;
-        SmartAdserver.BASE_URL = baseUrl;
+        SmartAdBanner.SITE_ID = siteId;
+        SmartAdBanner.BASE_URL = baseUrl;
         app.on("launch", () => {
             SASAdView.setSiteIDBaseURL(siteId, baseUrl);
         });
@@ -44,7 +44,7 @@ export class SmartAdBanner extends Common {
         super.onLoaded();
 
         this.nativeView.delegate = SASAdViewDelegateImpl.initWithOwner(
-            new WeakRef<SmartAdserver>(this)
+            new WeakRef<SmartAdBanner>(this)
         );
         this.nativeView.modalParentViewController = topmost().ios.controller.visibleViewController;
         this.nativeView.autoresizingMask = UIViewAutoresizing.FlexibleWidth;
@@ -90,10 +90,10 @@ export class SmartAdBanner extends Common {
 
 class SASAdViewDelegateImpl extends NSObject implements SASAdViewDelegate {
     public static ObjCProtocols = [SASAdViewDelegate];
-    private _owner: WeakRef<SmartAdserver>;
+    private _owner: WeakRef<SmartAdBanner>;
 
     public static initWithOwner(
-        owner: WeakRef<SmartAdserver>
+        owner: WeakRef<SmartAdBanner>
     ): SASAdViewDelegateImpl {
         const delegate = new SASAdViewDelegateImpl();
         delegate._owner = owner;

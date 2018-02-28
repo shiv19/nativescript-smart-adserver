@@ -22,9 +22,6 @@ export class SmartAdBanner extends Common {
     public static init(siteId: number, baseUrl: string) {
         SmartAdBanner.SITE_ID = siteId;
         SmartAdBanner.BASE_URL = baseUrl;
-        app.on("launch", () => {
-            SASAdView.setSiteIDBaseURL(siteId, baseUrl);
-        });
     }
 
     public createNativeView(): Object {
