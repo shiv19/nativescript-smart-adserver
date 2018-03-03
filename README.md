@@ -29,7 +29,7 @@ To use this plugin, you will need Site ID, Base URL of your site, Page ID and Fo
 In app.ts you have to initialize the plugin
 
 ```js
-import { SmartAdBanner } from "nativescript-smart-adserver";
+import { SmartAdBanner } from "@nstudio/nativescript-smart-adserver";
 
 SmartAdBanner.init(104808, "https://mobile.smartadserver.com");
 ```
@@ -38,7 +38,7 @@ Then in the xml file, include this namespace on the parent component of where yo
 want to place the AdView.
 
 ```xml
-xmlns:sas="nativescript-smart-adserver"
+xmlns:sas="@nstudio/nativescript-smart-adserver"
 ```
 
 Now you can create smart ad banner like this,
@@ -55,7 +55,7 @@ Now you can create smart ad banner like this,
 Same as Typescript, but the import statement will be
 
 ```js
-const SmartAdBanner = require("nativescript-smart-adserver").SmartAdBanner;
+const SmartAdBanner = require("@nstudio/nativescript-smart-adserver").SmartAdBanner;
 ```
 
 ### Angular
@@ -63,7 +63,7 @@ const SmartAdBanner = require("nativescript-smart-adserver").SmartAdBanner;
 In main.ts you have to initialize the plugin
 
 ```js
-import { SmartAdBanner } from "nativescript-smart-adserver";
+import { SmartAdBanner } from "@nstudio/nativescript-smart-adserver";
 
 SmartAdBanner.init(104808, "https://mobile.smartadserver.com");
 ```
@@ -71,7 +71,7 @@ SmartAdBanner.init(104808, "https://mobile.smartadserver.com");
 In the module where you want to add Ads (eg, app.module.ts), import it like this\
 
 ```js
-import { NativescriptSmartAdBannerModule } from "nativescript-smart-adserver/angular";
+import { NativescriptSmartAdBannerModule } from "@nstudio/nativescript-smart-adserver/angular";
 ```
 
 Now add `NativescriptSmartAdBannerModule` to the imports array of that module
